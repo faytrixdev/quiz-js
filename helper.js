@@ -1,34 +1,35 @@
 import readline from "readline";
 
-// 🦁 Ce code permet de générer une function "prompt"
-// Cette function permet de récupérer une valeur saisie par l'utilisateur
-// Il ne t'ai pas encore demandé de comprendre ce code, mais tu peux le lire et l'analyser
-// On verra dans la suite du cours :
-// * Comment fonctionne ce code
-// * Comment fonctionne les promise
-// * Comment fonctionne les async/await
-// Et on refera un tour sur ce code pour le comprendre
+// 🦁 This code generates a "prompt" function
+// This function retrieves a value entered by the user
+// You're not expected to understand this code yet, but you can read and analyze it
+// We'll see later in the course:
+// * How this code works
+// * How promises work
+// * How async/await works
+// And we'll revisit this code to understand it
 
-// 👇 Ce que tu vois ici, c'est de la JS doc qui te permet de documenter ton code.
+// 👇 What you see here is JS documentation that allows you to document your code.
+
 /**
- * La function prompt permet de récupérer une valeur saisie par l'utilisateur
- * @param {string} question La question à poser à l'utilisateur
- * @returns {Promise<string>} Une promise qui sera résolue avec la valeur saisie par l'utilisateur
+ * The prompt function retrieves a value entered by the user.
+ * @param {string} question The question to ask the user.
+ * @returns {Promise<string>} A promise that will be resolved with the value entered by the user.
  */
 export function prompt(question) {
-  // Creation d'une interface de lecture
+  // Creation of a reading interface
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
   });
 
-  // Retourne une promise
+  // Returns a promise
   return new Promise((resolve) => {
-    // Pose la question
+    // Asks the question
     rl.question(question, (answer) => {
-      // Ferme l'interface de lecture quand on a la réponse
+      // Closes the read interface when the answer is received
       rl.close();
-      // Renvoie la réponse
+      // Returns the answer
       resolve(answer);
     });
   });
