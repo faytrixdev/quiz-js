@@ -1,139 +1,131 @@
 import { prompt } from "./helper.js";
 
 let i = 0;
+
 let points = 0;
 
-const correctAnswers = ["a", "b", "b", "a", "a", "b", "a", "a", "b", "a"];
+const trueReponse = ["a", "b", "b", "a", "a", "b", "a", "a", "b", "a"];
 
-const quizzes = [
+const quizs = [
   {
     question:
-      "1. What is the main difference between let and var in a function?",
-    responses: `    a) let is block-scoped { }, var is function-scoped
+      "1. Quelle différence principale entre let et var dans une fonction ?",
+    reponses: `    a) let est limité au bloc { }, var à toute la fonction
     
-    b) var cannot store strings
+    b) var ne peut pas stocker de string
 
-    c) let is always faster than var`,
+    c) let est toujours plus rapide que var`,
   },
   {
-    question: "2. What does typeof NaN return?",
-    responses: `    a) "NaN"
+    question: "2. Que renvoyer typeof NaN ?",
+    reponses: `    a) "NaN"
 
     b) "number"
 
-    c) "undefined"`,
+    c)"undefined"`,
   },
   {
-    question: "3. Which array declaration is correct?",
-    responses: `    a) let arr = (1, 2, 3);
+    question: "3. Quel tableau est correctement déclaré ?",
+    reponses: `    a) let arr = (1, 2, 3);
     
     b) let arr = [1, 2, 3];
 
-    c) let arr = {1, 2, 3};`,
+    c)let arr = {1, 2, 3};`,
   },
   {
-    question: "4. What does arr.includes(3) do on let arr = [1, 2, 3, 4];?",
-    responses: `    a) Checks if 3 is present in the array
+    question: "4. Que fait arr.includes(3)-on let arr = [1, 2, 3, 4]; ?",
+    reponses: `    a) Vérifie si 3 est présent dans le tableau
 
-    b) Removes 3 from the array
+    b) Supprime 3 du tableau
 
-    c) Returns the position of 3`,
+    c) Retourne la position de 3`,
   },
   {
-    question: "5. Which statement is true about == and ===?",
-    responses: `    a) == converts types before comparing, === does not
-    
-    b) === converts types before comparing, == does not
+    question: "5. Quelle affirmation est vraie pour == et === ?",
+    reponses: `    a) == convertit les types avant de comparer, === ne convertit pas
 
-    c) Both always behave exactly the same`,
+    b) === convertit les types avant de comparer, == ne convertit pas
+
+    c) Les deux se comportent toujours exactement pareil`,
   },
   {
-    question: `6. What is the potential problem with this pseudo-code?
-"I create a function that modifies an array passed as a parameter."`,
-    responses: `    a) The array cannot be passed as a parameter
+    question: `6. Quel est le problème possible avec ce pseudo-code ?
+«Je crée une fonction qui modifie un tableau passé en paramètre.»`,
+    reponses: `    a) L'array ne peut pas être passé en paramètre
 
-    b) The function can directly modify the original array
+    b) La fonction peut modifier directement l'array original
 
-    c) The function will always return an automatic copy`,
+    c) La fonction renverra toujours une copie automatique`,
   },
   {
     question:
-      "7. What does 'this' mean in an object method like: const user = { name: 'Ali', hello() { /* here */ } } when calling user.hello()?",
-    responses: `    a) this refers to user
+      "7. Que signifie this dans une méthode d'un objet simple comme : const user = { name: 'Ali', hello() { /* ici */ } }lorsqu'on appelle user.hello()?",
+    reponses: `    a) this fait référence à user
 
-    b) this always refers to window
+    b) this fait toujours référence à window
 
-    c) this is always undefined`,
+    c) this est toujours undefined`,
   },
   {
-    question: "8. Why doesn't const make an object completely 'locked'?",
-    responses: `    a) Because you can still change the object's internal content
+    question:
+      "8. Pourquoi const ne rend pas un objet complètement « bloqué » ?",
+    reponses: `    a) Parce qu'on peut encore changer le contenu interne de l'objet
 
-    b) Because you can reassign the variable to another object
+    b) Parce qu'on peut réaffecter la variable à un autre objet
 
-    c) Because const only works on numbers`,
+    c) Parce que constne fonctionne que sur les nombres`,
   },
   {
-    question: "9. What does arr.map(x => x * 2) do on an array of numbers?",
-    responses: `    a) Directly modifies the original array
+    question: "9. Que fait arr.map(x => x * 2) sur un tableau de nombres ?",
+    reponses: `    a) Modifie directement le tableau original
 
-    b) Creates a new array with each element multiplied by 2
+    b) Crée un nouveau tableau avec chaque élément multiplié par 2
 
-    c) Removes elements less than 2`,
+    c) Supprime les éléments inférieurs à 2`,
   },
   {
-    question: "10. What does JSON.stringify(obj) do?",
-    responses: `    a) Convert an object to a JSON format text string
+    question: "10. Que signifie JSON.stringify(obj)?",
+    reponses: `    a) Convertir un objet en chaîne de texte au format JSON
 
-    b) Convert a JSON string to an object
+    b) Convertir une chaîne JSON en objet
 
-    c) Remove all keys from the object`,
+    c) Supprimer toutes les clés de l'objet`,
   },
 ];
 
-console.log("");
-console.log("Welcome to the quiz!");
-
 while (i < 10) {
   console.log("");
-  console.log(quizzes[i].question);
+  console.log(quizs[i].question);
   console.log("");
-  console.log(quizzes[i].responses);
+  console.log(quizs[i].reponses);
   console.log("");
-  let response = await prompt("Enter your answer: ");
-  if (response === correctAnswers[i]) {
+  let reponse = await prompt("Entrer la réponse : ");
+  if (reponse === trueReponse[i]) {
     console.log("");
-    console.log("Correct answer!");
+    console.log("Bonne reponse");
     points++;
-  } else if (response === null || response === "") {
+  } else if (reponse === null || reponse === "") {
     console.log("");
-    console.log("Error: Please enter a valid answer (a, b, or c)");
-  } else if (response !== "a" && response !== "b" && response !== "c") {
+    console.log("Erreur : Veuillez entrer une reponse valide (a, b ou c)");
+  } else if (reponse !== "a" && reponse !== "b" && reponse !== "c") {
     console.log("");
-    console.log("Error: Please enter a valid answer (a, b, or c)");
-  } else if (response !== correctAnswers[i]) {
+    console.log("Erreur : Veuillez entrer une reponse valide (a, b ou c)");
+  } else if (reponse !== trueReponse[i]) {
     console.log("");
-    console.log("Wrong answer");
+    console.log("Mauvaise reponse");
     console.log("");
-    console.log(`The correct answer is ${correctAnswers[i]}`);
+    console.log(`La bonne reponse est ${trueReponse[i]}`);
   }
-  i++;
 }
 
 console.log("");
 
 if (points === 10) {
-  console.log(
-    "Congratulations, you got everything right, you scored 10 points!"
-  );
+  console.log("Bravo, vous avez tout juste, vous avez obtenu 10 points");
 } else if (points > 0 && points < 10) {
-  console.log(`Great job, you scored ${points} points!`);
+  console.log(`Bravo, vous avez obtenu ${points} points`);
 } else {
-  console.log("Too bad, you scored 0 points");
+  console.log("Dommage, vous avez obtenu 0 points");
 }
 
-console.log("");
-console.log("Thanks for playing!");
-console.log("");
-console.log("Goodbye!");
 console.log("");
